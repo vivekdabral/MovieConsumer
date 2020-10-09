@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.test</groupId>
+    <artifactId>movie-consumer</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.4.RELEASE</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.2.8.RELEASE</version>
+        </dependency>
+
+
+
+        <dependency>
+            <groupId>au.com.dius</groupId>
+            <artifactId>pact-jvm-consumer-junit5</artifactId>
+            <version>4.0.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>au.com.dius</groupId>
+            <artifactId>pact-jvm-consumer-java8</artifactId>
+            <version>4.0.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-contract-wiremock</artifactId>
+            <version>2.2.2.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-contract-stub-runner</artifactId>
+            <version>2.2.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.ta</groupId>
+            <artifactId>wiremock-pact-generator</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/au.com.dius/pact-jvm-consumer-junit -->
+        <dependency>
+            <groupId>au.com.dius.pact.consumer</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.1.4</version>
+        </dependency>
+
+
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.2.8.RELEASE</version>
+            </plugin>
+
+<!--            <plugin>-->
+<!--                <groupId>au.com.dius</groupId>-->
+<!--                <artifactId>pact-jvm-provider-maven</artifactId>-->
+<!--                <version>4.0.0</version>-->
+<!--                <configuration>-->
+<!--                    <pactBrokerUrl>http://localhost:8113</pactBrokerUrl>-->
+<!--                    <pactDirectory>target/pacts</pactDirectory>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
+            <plugin>
+                <groupId>au.com.dius.pact.provider</groupId>
+                <artifactId>maven</artifactId>
+                <version>4.1.0</version>
+                <configuration>
+                    <pactDirectory>target/pacts</pactDirectory> <!-- Defaults to ${project.build.directory}/pacts -->
+<!--                    <pactBrokerUrl>http://localhost:8113</pactBrokerUrl>-->
+<!--                    <pactBrokerUrl>http://192.168.64.4:31725/</pactBrokerUrl>-->
+                    <pactBrokerUrl>http://pact.buildingiq.com</pactBrokerUrl>
+                    <projectVersion>${pact.consumer.version}</projectVersion> <!-- Defaults to ${project.version} -->
+                    <trimSnapshot>true</trimSnapshot> <!-- Defaults to false -->
+                    <skipPactPublish>false</skipPactPublish> <!-- Defaults to false -->
+                    <tags>TEST</tags>
+
+                </configuration>
+            </plugin>
+
+
+        </plugins>
+    </build>
+
+</project>
